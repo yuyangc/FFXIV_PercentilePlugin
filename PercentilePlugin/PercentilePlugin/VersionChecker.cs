@@ -13,8 +13,8 @@ namespace PercentilePlugin
     // https://github.com/anoyetta/ACT.SpecialSpellTimer/blob/master/ACT.SpecialSpellTimer.Core/UpdateChecker.cs
     public class VersionChecker
     {
-        public const string kReleaseUrl = "https://github.com/Liquidize/FFXIV_PercentilePlugin/releases/latest";
-        public const string kIssueUrl = "https://github.com/Liquidize/FFXIV_PercentilePlugin/releases/issues";
+        public const string kReleaseUrl = "https://github.com/yuyangc/FFXIV_PercentilePlugin/releases/latest";
+        public const string kIssueUrl = "https://github.com/yuyangc/FFXIV_PercentilePlugin/releases/issues";
 
         public VersionChecker()
         {
@@ -57,7 +57,7 @@ namespace PercentilePlugin
                 return new Version();
             }
 
-            var pattern = @"href=""/liquidize/FFXIV_PercentilePlugin/releases/download/v?(?<Version>.*?)/";
+            var pattern = @"href=""/yuyangc/FFXIV_PercentilePlugin/releases/download/v?(?<Version>.*?)/";
             var regex = new Regex(pattern, RegexOptions.IgnoreCase | RegexOptions.Singleline);
             var match = regex.Match(html);
             if (!match.Success)

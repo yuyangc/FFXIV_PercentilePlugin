@@ -129,7 +129,7 @@ namespace PercentilePlugin
             try
             {
                 var request =
-                    WebRequest.Create("https://github.com/Liquidize/FFXIV_PercentilePlugin/raw/master/parsedata.bin");
+                    WebRequest.Create("https://github.com/yuyangc/FFXIV_PercentilePlugin/raw/master/parsedata.bin");
                 var response = await request.GetResponseAsync();
                 if (response.GetResponseStream() != null)
                     using (var bsonReader = new BsonReader(response.GetResponseStream()))
@@ -194,6 +194,8 @@ namespace PercentilePlugin
                     return "Lakshmi";
                 case "スサノオ":
                     return "Susano";
+                case "青龍":
+                    return "Seiryu";
                 case "背徳の皇帝マティウス":
                     return "Mateus, the Corrupt";
                 case "統制者ハシュマリム":
