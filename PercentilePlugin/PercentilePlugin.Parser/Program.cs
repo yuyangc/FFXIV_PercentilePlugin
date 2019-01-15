@@ -270,6 +270,7 @@ namespace PercentilePlugin
             }
             catch (Exception ex)
             {
+                Logger.Log(LogLevel.Error, " Failed to parse encounters ");
                 return await Task.FromResult(false);
             }
 
@@ -287,7 +288,7 @@ namespace PercentilePlugin
                 var currentTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
                 var startTime = percentileData.LastUpdated != 0
                     ? percentileData.LastUpdated
-                    : new DateTimeOffset(DateTime.Now.Subtract(TimeSpan.FromDays(500))).ToUnixTimeMilliseconds();
+                    : new DateTimeOffset(DateTime.Now.Subtract(TimeSpan.FromDays(14))).ToUnixTimeMilliseconds();
                 var rankings = new List<double>();
                 var hasMorePages = true;
                 var page = 1;
@@ -327,8 +328,10 @@ namespace PercentilePlugin
                 if (percentileData.Rankings.ContainsKey(name) != true)
                 {
                     percentileData.Rankings.Add(name, new Dictionary<string, List<double>>());
-                    if (percentileData.Rankings[name].ContainsKey(job.Abbrveiation) != true)
-                        percentileData.Rankings[name].Add(job.Abbrveiation, new List<double>());
+                }
+                if (percentileData.Rankings[name].ContainsKey(job.Abbrveiation) != true)
+                {
+                    percentileData.Rankings[name].Add(job.Abbrveiation, new List<double>());
                 }
 
                 percentileData.Rankings[name][job.Abbrveiation].AddRange(rankings);
