@@ -74,6 +74,10 @@ namespace PercentilePlugin.Shared
                     break;
                 case "Suzaku":
                     return "Hell's Kier (Extreme)";
+                    break;
+                case "Seiryu":
+                    return "The Wreath of Snakes (Extreme)";
+                    break;
                 case "Bahamut Prime":
                     return "The Unending Coil of Bahamut";
                     break;

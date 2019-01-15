@@ -23,7 +23,7 @@ namespace PercentilePlugin
         private static List<Instance> instances;
         private static PercentileData percentileData;
 
-        private static readonly string APIKey = "";
+        private static readonly string APIKey = "3dd4ec9f05c333b48d73fc7ea577a6c5";
 
         public static async Task Main(string[] args)
         {
