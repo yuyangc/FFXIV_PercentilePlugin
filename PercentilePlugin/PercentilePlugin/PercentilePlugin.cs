@@ -177,23 +177,31 @@ namespace PercentilePlugin
             switch (boss)
             {
                 case "カオス":
+                case "卡奥斯":
                     return "Chaos";
+                case "尘世幻龙":
                 case "ミドガルズオルム":
                     return "Midgardsormr";
+                case "欧米茄":
                 case "オメガ":
                     return "Omega";
                 case "朱雀":
                     return "Suzaku";
                 case "ツクヨミ":
+                case "月读":
                     return "Tsukuyomi";
                 case "白虎":
                     return "Byakko";
+                case "神龙":
                 case "神龍":
                     return "Shinryu";
+                case "吉祥天女":
                 case "ラクシュミ":
                     return "Lakshmi";
+                case "须佐之男":
                 case "スサノオ":
                     return "Susano";
+                case "青龙":
                 case "青龍":
                     return "Seiryu";
                 case "背徳の皇帝マティウス":
