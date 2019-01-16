@@ -65,7 +65,7 @@ namespace PercentilePlugin
             try
             {
                 var request =
-                    WebRequest.Create("https://github.com/Liquidize/FFXIV_PercentilePlugin/raw/master/parsedata.bin");
+                    WebRequest.Create("https://github.com/yuyangc/FFXIV_PercentilePlugin/raw/master/parsedata.bin");
                 var response = await request.GetResponseAsync();
                 if (response.GetResponseStream() != null)
                     using (var bsonReader = new BsonReader(response.GetResponseStream()))
