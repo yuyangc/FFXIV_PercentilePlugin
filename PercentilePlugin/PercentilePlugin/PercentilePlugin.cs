@@ -141,7 +141,7 @@ namespace PercentilePlugin
                         if (data != null)
                         {
                             PercentileData = data;
-                            var file = new FileStream("PercentilePlugin/parsedata.bin", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
+                            var file = new FileStream("PercentilePlugin/parsedata.bin", FileMode.OpenOrCreate, FileAccess.ReadWrite);
                             using (var writer = new BsonWriter(file))
                             {
                                 serializer.Serialize(writer, data);
