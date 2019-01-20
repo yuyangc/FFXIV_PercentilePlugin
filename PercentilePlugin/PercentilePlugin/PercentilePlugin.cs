@@ -66,6 +66,7 @@ namespace PercentilePlugin
             var checker = new VersionChecker();
             var local = checker.GetLocalVersion();
             var remote = checker.GetRemoteVersion();
+            MessageBox.Show("Your recent is " + local + ".\n\n" + "Remote is " + remote);
             if (remote.Major == 0 && remote.Minor == 0)
             {
                 var result = MessageBox.Show(
@@ -140,7 +141,7 @@ namespace PercentilePlugin
                         if (data != null)
                         {
                             PercentileData = data;
-                            var file = new FileStream("PercentilePlugin/parsedata.bin", FileMode.OpenOrCreate);
+                            var file = new FileStream("PercentilePlugin/parsedata.bin", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
                             using (var writer = new BsonWriter(file))
                             {
                                 serializer.Serialize(writer, data);
