@@ -66,7 +66,6 @@ namespace PercentilePlugin
             var checker = new VersionChecker();
             var local = checker.GetLocalVersion();
             var remote = checker.GetRemoteVersion();
-            MessageBox.Show("Your recent is " + local + ".\n\n" + "Remote is " + remote);
             if (remote.Major == 0 && remote.Minor == 0)
             {
                 var result = MessageBox.Show(
