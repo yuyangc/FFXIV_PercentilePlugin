@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Bson;
 using PercentilePlugin.Shared;
 
+
 namespace PercentilePlugin
 {
     public class PercentilePlugin : IActPluginV1
@@ -232,17 +233,18 @@ namespace PercentilePlugin
             strongest = string.IsNullOrEmpty(GetTranslatedStrongest(strongest))
                 ? strongest
                 : GetTranslatedStrongest(strongest);
-            if (enc.ZoneName.ToLower() == "the Weapon's Refrain (Ultimate)".ToLower()) return "The Ultima Weapon";
-            if (enc.ZoneName.ToLower() == "the Unending Coil of Bahamut (Ultimate)".ToLower()) return "Bahamut Prime";
+            if (enc.ZoneName.ToLower() == "the Weapon's Refrain (Ultimate)".ToLower() || enc.ZoneName.Contains("究极神兵绝境战")) return "The Ultima Weapon";
+            if (enc.ZoneName.ToLower() == "the Unending Coil of Bahamut (Ultimate)".ToLower() || enc.ZoneName.Contains("巴哈姆特绝境战")) return "Bahamut Prime";
 
-            if (enc.ZoneName.Contains("Alphascape (V4.0)")) strongest = "Omega-M and Omega-F";
+            if (enc.ZoneName.Contains("Alphascape (V4.0)") || enc.ZoneName.Contains("阿尔法幻境4")) strongest = "Omega-M and Omega-F";
 
-            if (enc.ZoneName.Contains("Savage")) strongest = strongest + " (Savage)";
+            if (enc.ZoneName.Contains("Savage") || enc.ZoneName.Contains("零式")) strongest = strongest + " (Savage)";
 
-            if (enc.ZoneName.Contains("Alphascape") && enc.ZoneName.Contains("4.0") && enc.ZoneName.Contains("Savage"))
+            if ((enc.ZoneName.Contains("Alphascape") && enc.ZoneName.Contains("4.0") && enc.ZoneName.Contains("Savage"))||
+                (enc.ZoneName.Contains("欧米茄零式时空狭缝") && enc.ZoneName.Contains("阿尔法幻境4")))
             {
                 if (combatant.AllOut.ContainsKey("Target Analysis") || combatant.AllOut.ContainsKey("標的識別") ||
-                    combatant.AllOut.ContainsKey("Unknown_336C"))
+                    combatant.AllOut.ContainsKey("Unknown_336C") || combatant.AllOut.ContainsKey("目标识别"))
                     return "The Final Omega (Savage)";
                 return "Omega-M and Omega-F (Savage)";
             }
@@ -284,8 +286,9 @@ namespace PercentilePlugin
                 else
                     r = index - 1;
             }
-
-            return (100 * index + sequence.Length) / sequence.Length;
+            
+            
+            return (double) Math.Floor((double) (100 * index + sequence.Length) / sequence.Length);
         }
     }
 }

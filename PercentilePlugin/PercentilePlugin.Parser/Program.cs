@@ -142,7 +142,7 @@ namespace PercentilePlugin
 
             try
             {
-                var request = WebRequest.Create("https://www.fflogs.com:443/v1/classes?api_key=" + apiKey);
+                var request = WebRequest.Create("https://cn.fflogs.com:443/v1/classes?api_key=" + apiKey);
                 var response = await request.GetResponseAsync();
                 if (response.GetResponseStream() != null)
                     using (var reader =
@@ -195,7 +195,7 @@ namespace PercentilePlugin
 
             try
             {
-                var request = WebRequest.Create("https://www.fflogs.com:443/v1/zones?api_key=" + apiKey);
+                var request = WebRequest.Create("https://cn.fflogs.com:443/v1/zones?api_key=" + apiKey);
                 var response = await request.GetResponseAsync();
                 if (response.GetResponseStream() != null)
                     using (var reader =
@@ -288,14 +288,14 @@ namespace PercentilePlugin
                 var currentTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
                 var startTime = percentileData.LastUpdated != 0
                     ? percentileData.LastUpdated
-                    : new DateTimeOffset(DateTime.Now.Subtract(TimeSpan.FromDays(14))).ToUnixTimeMilliseconds();
+                    : new DateTimeOffset(DateTime.Now.Subtract(TimeSpan.FromDays(500))).ToUnixTimeMilliseconds();
                 var rankings = new List<double>();
                 var hasMorePages = true;
                 var page = 1;
                 while (hasMorePages)
                 {
                     var request = WebRequest.Create(string.Format(
-                        "https://www.fflogs.com:443/v1/rankings/encounter/{0}?spec={1}&page={2}&filter=date.{3}.{4}&api_key=" +
+                        "https://cn.fflogs.com:443/v1/rankings/encounter/{0}?spec={1}&page={2}&filter=date.{3}.{4}&api_key=" +
                         apiKey,
                         enc.Key, job.Key, page, startTime, currentTime));
                     request.Timeout = 5000;
