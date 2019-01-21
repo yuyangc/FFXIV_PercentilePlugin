@@ -317,7 +317,7 @@ namespace PercentilePlugin
                         }
                     }
 
-                    Thread.Sleep(250);
+                    Thread.Sleep(500);
                     Logger.Log(LogLevel.Info, "Successfully Read Page: " + page);
                     ++page;
                 }
