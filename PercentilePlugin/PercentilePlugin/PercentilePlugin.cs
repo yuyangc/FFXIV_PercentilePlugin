@@ -205,21 +205,17 @@ namespace PercentilePlugin
                 case "青龙":
                 case "青龍":
                     return "Seiryu";
-                case "背徳の皇帝マティウス":
-                    return "Mateus, the Corrupt";
-                case "統制者ハシュマリム":
-                    return "Hashmal, Bringer of Order";
-                case "人馬王ロフォカレ":
-                    return "Rofocale";
-                case "冷血剣アルガス":
-                    return "Argath Thadalfus";
                 case "暗黒の雲ファムフリート":
+                case "暗黑之云法姆弗里特":
                     return "Famfrit, the Darkening Cloud";
                 case "魔人ベリアス":
+                case "魔人贝利亚斯":
                     return "Belias, the Gigas";
                 case "労働七号":
+                case "劳动七号":
                     return "Construct 7";
                 case "鬼龍ヤズマット":
+                case "鬼龙雅兹玛特":
                     return "Yiazmat";
             }
 
@@ -277,18 +273,34 @@ namespace PercentilePlugin
             var r = sequence.Length - 1;
             var index = sequence.Length / 2;
 
+
             while (l <= r)
             {
                 index = l + (r - l) / 2;
 
                 if (sequence[index] < DPS)
+                {
+                    if (l == r)
+                    {
+                        index = index + 1;
+                    }
                     l = index + 1;
+                }
                 else
+                {
                     r = index - 1;
+                }
             }
-            
-            
-            return (double) Math.Floor((double) (100 * index + sequence.Length) / sequence.Length);
+            double percentile_calc = 0.0;
+            percentile_calc = 100 * index / sequence.Length;
+            if (percentile_calc <= 99.994)
+            {
+                return Math.Floor(percentile_calc);
+            }
+            else
+            {
+                return 100;
+            }
         }
     }
 }

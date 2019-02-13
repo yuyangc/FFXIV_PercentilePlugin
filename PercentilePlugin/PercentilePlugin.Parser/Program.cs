@@ -125,12 +125,28 @@ namespace PercentilePlugin
                 index = l + (r - l) / 2;
 
                 if (sequence[index] < DPS)
+                {
+                    if (l == r)
+                    {
+                        index = index + 1;
+                    }
                     l = index + 1;
+                }
                 else
+                {
                     r = index - 1;
+                }
+             }
+            double percentile_calc = 0.0;
+            percentile_calc = 100 * index / sequence.Length;
+            if (percentile_calc <= 99.994)
+            {
+                return Math.Floor(percentile_calc);
             }
-
-            return (100 * index + sequence.Length) / sequence.Length;
+            else
+            {
+                return 100;
+            }
         }
 
         public static async Task<bool> BuildClasses(string apiKey)
@@ -206,7 +222,7 @@ namespace PercentilePlugin
                         if (array.HasValues)
                             foreach (var category in array)
                                 if (category["frozen"].ToObject<bool>() == false &&
-                                    category["id"].ToObject<int>() != 2 && category["id"].ToObject<int>() != 14)
+                                    category["id"].ToObject<int>() != 2 && category["id"].ToObject<int>() != 14 && category["id"].ToObject<int>() != 22 && category["id"].ToObject<int>() != 26)
                                     foreach (var encounter in category["encounters"])
                                     {
                                         var encObj = new Encounter();
@@ -230,7 +246,7 @@ namespace PercentilePlugin
 
                                         instance.Encounters.Add(encObj.Name, encObj);
                                         Logger.Log(LogLevel.Info,
-                                            string.Format("Parsed Encounter: {0} From Instance: {1}.", encObj.Name,
+                                            string.Format("Parsed Encounter: {0} with key {1} From Instance: {2}.", encObj.Name, encObj.Key,
                                                 instance.MapName));
                                     }
                     }
@@ -249,6 +265,7 @@ namespace PercentilePlugin
                 return await Task.FromResult(false);
             }
         }
+        
 
         public static async Task<bool> BuildPercentiles()
         {
@@ -324,7 +341,82 @@ namespace PercentilePlugin
 
                 Logger.Log(LogLevel.Info, "Successfully Read " + rankings.Count + " Rankings.");
 
+
+   
                 var name = enc.Name.ToLower();
+                switch (name)
+                {
+                    case "卡奥斯 (Savage)":
+                        name = "Chaos (Savage)";
+                        break;
+                    case "カオス":
+                    case "卡奥斯":
+                        name = "Chaos";
+                        break;
+                    case "尘世幻龙 (Savage)":
+                        name = "Midgardsormr (Savage)";
+                        break;
+                    case "欧米茄 (Savage)":
+                        name = "Omega (Savage)";
+                        break;
+                    case "双生欧米茄 (Savage)":
+                        name = "Omega-M and Omega-F (Savage)";
+                        break;
+                    case "至尊欧米茄 (Savage)":
+                        name = "The Final Omega (Savage)";
+                        break;
+                    case "尘世幻龙":
+                    case "ミドガルズオルム":
+                        name = "Midgardsormr";
+                        break;
+                    case "欧米茄":
+                    case "オメガ":
+                        name = "Omega";
+                        break;
+                    case "朱雀":
+                        name = "Suzaku";
+                        break;
+                    case "ツクヨミ":
+                    case "月读":
+                        name = "Tsukuyomi";
+                        break;
+                    case "白虎":
+                        name = "Byakko";
+                        break;
+                    case "神龙":
+                    case "神龍":
+                        name = "Shinryu";
+                        break;
+                    case "吉祥天女":
+                    case "ラクシュミ":
+                        name = "Lakshmi";
+                        break;
+                    case "须佐之男":
+                    case "スサノオ":
+                        name = "Susano";
+                        break;
+                    case "青龙":
+                    case "青龍":
+                        name = "Seiryu";
+                        break;
+                    case "暗黒の雲ファムフリート":
+                    case "暗黑之云法姆弗里特":
+                        name = "Famfrit, the Darkening Cloud";
+                        break;
+                    case "魔人ベリアス":
+                    case "魔人贝利亚斯":
+                        name = "Belias, the Gigas";
+                        break;
+                    case "労働七号":
+                    case "劳动七号":
+                        name = "Construct 7";
+                        break;
+                    case "鬼龍ヤズマット":
+                    case "鬼龙雅兹玛特":
+                        name = "Yiazmat";
+                        break;
+                }
+                
                 if (percentileData.Rankings.ContainsKey(name) != true)
                 {
                     percentileData.Rankings.Add(name, new Dictionary<string, List<double>>());
