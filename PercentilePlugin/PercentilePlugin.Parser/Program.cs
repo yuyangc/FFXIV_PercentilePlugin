@@ -67,7 +67,7 @@ namespace PercentilePlugin
             await BuildInstances(APIKey);
             Logger.Log(LogLevel.Info, "Zone/Instance Data Obtained.");
             Logger.Log(LogLevel.Info, "Obtaining latest Parse Data.");
-            await BuildPercentiles();
+            await BuildPercentiles(APIKey);
             Logger.Log(LogLevel.Info, "Latest Parse Data Obtained.");
             Logger.Log(LogLevel.Info, "Cleaning Up New Data.");
 
@@ -181,7 +181,7 @@ namespace PercentilePlugin
                                         cjob.Name = Convert.ToString(job["name"]);
                                         cjob.Abbrveiation = ClassJob.NameToAbbr(cjob.Name).ToUpper();
                                         jobs.Add(cjob);
-                                        Logger.Log(LogLevel.Info, string.Format("Parsed Job: {0}.", cjob.Name));
+                                        Logger.Log(LogLevel.Info, string.Format("Parsed Job: {0}. key is {1}", cjob.Name, cjob.Key));
                                     }
                             }
                         }
@@ -267,7 +267,7 @@ namespace PercentilePlugin
         }
         
 
-        public static async Task<bool> BuildPercentiles()
+        public static async Task<bool> BuildPercentiles(string APIKey)
         {
             try
             {
@@ -301,7 +301,8 @@ namespace PercentilePlugin
             {
                 Logger.Log(LogLevel.Info,
                     "Starting Parse Data For: " + job.Name + " Encounter " + enc.Name);
-
+                Logger.Log(LogLevel.Info,
+                    "Job key is: " + job.Key + " Encounter key is: " + enc.Key);
                 var currentTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
                 var startTime = percentileData.LastUpdated != 0
                     ? percentileData.LastUpdated
@@ -344,7 +345,88 @@ namespace PercentilePlugin
 
    
                 var name = enc.Name.ToLower();
-                
+                switch (name)
+                {
+                    case "至尊巴哈姆特":
+                        name = "Bahamut Prime";
+                        break;
+                    case "究极神兵":
+                        name = "The Ultima Weapon";
+                        break;
+                    case "卡奥斯 (savage)":
+                        name = "Chaos (Savage)";
+                        break;
+                    case "カオス":
+                    case "卡奥斯":
+                        name = "Chaos";
+                        break;
+                    case "尘世幻龙 (savage)":
+                        name = "Midgardsormr (Savage)";
+                        break;
+                    case "欧米茄 (savage)":
+                        name = "Omega (Savage)";
+                        break;
+                    case "双生欧米茄":
+                        name = "Omega-M and Omega-F";
+                        break;
+                    case "双生欧米茄 (savage)":
+                        name = "Omega-M and Omega-F (Savage)";
+                        break;
+                    case "至尊欧米茄 (savage)":
+                        name = "The Final Omega (Savage)";
+                        break;
+                    case "尘世幻龙":
+                    case "ミドガルズオルム":
+                        name = "Midgardsormr";
+                        break;
+                    case "欧米茄":
+                    case "オメガ":
+                        name = "Omega";
+                        break;
+                    case "朱雀":
+                        name = "Suzaku";
+                        break;
+                    case "ツクヨミ":
+                    case "月读":
+                        name = "Tsukuyomi";
+                        break;
+                    case "白虎":
+                        name = "Byakko";
+                        break;
+                    case "神龙":
+                    case "神龍":
+                        name = "Shinryu";
+                        break;
+                    case "吉祥天女":
+                    case "ラクシュミ":
+                        name = "Lakshmi";
+                        break;
+                    case "须佐之男":
+                    case "スサノオ":
+                        name = "Susano";
+                        break;
+                    case "青龙":
+                    case "青龍":
+                        name = "Seiryu";
+                        break;
+                    case "暗黒の雲ファムフリート":
+                    case "暗黑之云法姆弗里特":
+                        name = "Famfrit, the Darkening Cloud";
+                        break;
+                    case "魔人ベリアス":
+                    case "魔人贝利亚斯":
+                        name = "Belias, the Gigas";
+                        break;
+                    case "労働七号":
+                    case "劳动七号":
+                        name = "Construct 7";
+                        break;
+                    case "鬼龍ヤズマット":
+                    case "鬼龙雅兹玛特":
+                        name = "Yiazmat";
+                        break;
+                }
+                name = name.ToLower();
                 if (percentileData.Rankings.ContainsKey(name) != true)
                 {
                     percentileData.Rankings.Add(name, new Dictionary<string, List<double>>());
@@ -356,6 +438,7 @@ namespace PercentilePlugin
 
                 percentileData.Rankings[name][job.Abbrveiation].AddRange(rankings);
                 Logger.Log(LogLevel.Info, "Success For Job " + job.Name + " Encounter " + enc.Name);
+                Logger.Log(LogLevel.Info, "Job Abbr is " + job.Abbrveiation + " Encounter name is " + name);
                 return await Task.FromResult(true);
             }
             catch (WebException ex)

@@ -24,7 +24,7 @@ namespace PercentilePlugin.Shared
                 case "占星术士":
                     return "AST";
                 case "Bard":
-                case "诗人":
+                case "吟游诗人":
                     return "BRD";
                 case "Black Mage":
                 case "黑魔法师":
