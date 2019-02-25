@@ -1,28 +1,17 @@
-﻿# FFXIV_PercentilePlugin (beta)
-Percentile Plugin for ACT to allow overlays to display FFLogs percentile data in real time.
+﻿# 最终幻想14-Logs百分比插件（测试版）
+基于ACT的Logs百分比插件，使伤害美化插件实时显示您的输出在CN FFLogs中的百分比。
 
-The plugin works by using data obtained from FFLogs and calculating the current percentile in real time using your current DPS. The data used should be fairly accurate +/- 1% (give or take) of the Historical Percentile if you use the latest data. You can view the percentiles in real time via the "Percentile" column that is added to ACT or via a compatible overlay.
+插件使用从CN FFLogs中拉取的数据，用您的实时DPS数据计算您的百分比。您可以通过ACT主表或美化插件中的"Percentile"进行查看。
 
-Percentiles displayed in a modified Kagerou overlay (the Pct column):
+提示：由于ACT统计DoT伤害的不准确性、比对方式的不同、以及更新数据的周期性，百分比基本准确，但可能与FFLogs上显示的数字略有不同。
+
+使用修改过的Kagerou伤害美化显示百分比:
 ![Example](https://i.imgur.com/lrgGFzG.png)
 
-**Note:** The plugin is still in development and while fully functional for displaying percentiles for known fights, future fights and some current fights may need to be adjusted.
+**贴士:** 本插件仍在测试与研发中，部分功能可能仍需优化。
 
-# How-To
-
-1. Obtain the latest version (zip file) of the plugin from the [Releases](https://github.com/Liquidize/FFXIV_PercentilePlugin/releases)
-2. Extract the zip file to where your "Advanced Combat Tracker.exe" is, usually something like "C:\Program Files (x86)\Advanced Combat Tracker"
-3. Run ACT as administrator (incase of permissions errors for writing config files)
-4. Go to the "Plugins" tab and the "PercentilePlugin.dll" as a plugin.
-5. Go to the "PercentilePlugin" plugin tab, and click update.
-6. Use a compatible overlay if you want to see the information in the overlay.
-
-**Note:** I've forked and added percentile functionality to the popular [Kagerou](https://github.com/hibiyasleep/kagerou) overlay, simply change the overlay URL to: **https://liquidize.github.io/kagerou/overlay/** and you should be able to add "Percentile" as a column in your tabs in the config. You will need to completely reconfigure your overlay though, unfortunately.
-
-Clicking the "Update" button will download the "parsedata.bin" file that is stored in this repository. This file contains all the data needed to calculate your parses, and is updated daily.
-
-# 使用方法介绍 (How-to)
-1. 下载插件的最新版本(.zip文件) -> [Releases](https://github.com/Liquidize/FFXIV_PercentilePlugin/releases)
+# 使用方法介绍
+1. 下载插件的最新版本(.zip文件) -> [Releases](https://github.com/yuyangc/FFXIV_PercentilePlugin/releases)
 2. 解压缩下载得到的.zip文件，将文件夹中的所有文件解压缩到 “Advanced Combat Tracker.exe” 所在目录。(通常情况类似于 “C:\Program Files (x86)\Advanced Combat Tracker” )
 3. 以管理员身份运行ACT
 4. 前往 “插件列表”，添加新插件 “PercentilePlugin.dll”
@@ -34,23 +23,19 @@ Clicking the "Update" button will download the "parsedata.bin" file that is stor
 点击 “Update” 按钮将重新下载最新的 “parsedata.bin” 文件，该文件保存了计算你的百分比所需的数据
 
 使用另一种常见overlay “MopiMopi” 的用户可以自行参照下方 “Compatible Overlays” 进行操作
-# Compatible Overlays
 
-1. [Kagerou pct](https://github.com/Liquidize/kagerou) - Forked by me, this is the latest version of Kagerou with the added ability to add "Percentile" as a column to your tabs. Just like Kagerou you can easily set this as your overlay by using the following url: https://liquidize.github.io/kagerou/overlay/
-2. [Fancy Detail Overlay](https://i.imgur.com/HGSZoQ6.png) - By 라그린네, I am unsure of the original name of this overlay a user of the plugin asked me to add support for it. You can find the overlay in the Overlays folder on the repository.
-3. [MopiMopi Pct](https://github.com/Liquidize/mopimopi) - A fork of [MopiMopi](https://github.com/HAERUHAERU/mopimopi) by [HaeruHaeru](https://github.com/HAERUHAERU/) with percentile support added by myself. This overlay requires ActWebSocket, follow the guide [HERE](https://docs.google.com/presentation/d/1U7-Vgv6UA2_EFdvw3m8BI-5-9T91WeKTflDuR7rEx-U/edit). Click [HERE](https://i.imgur.com/bPvNkIQ.png) for a preview. Use [https://liquidize.github.io/mopimopi/](https://liquidize.github.io/mopimopi/) as the URL instead of the one in the guide.
-4. [Horizon Overlay](https://github.com/unfaiyted/horizoverlay) - The Horizon Overlay with Percentile support by [Unfaiyted](https://github.com/unfaiyted/).
+# 可用的伤害美化插件
 
-If you want your overlay listed here, please message me in game or on discord.
+1. [Kagerou pct](https://github.com/Liquidize/kagerou) - 由Liquidize复制并修改的Kagerou伤害美化，增加了"Pct"栏来显示百分比数据。使用如下网址将其设置为您的美化插件：https://liquidize.github.io/kagerou/overlay/
 
-* **Character in game:** Kaliya Y'mhitra (Goblin - NA)
-* **Discord:** Kaliya#0001
+2. [MopiMopi Pct](https://github.com/Liquidize/mopimopi) -  [MopiMopi](https://github.com/HAERUHAERU/mopimopi) by [HaeruHaeru](https://github.com/HAERUHAERU/) 的修改版，由Liquidize增加了百分比支持。该插件需要ActWebSocket插件支持，点[此](https://docs.google.com/presentation/d/1U7-Vgv6UA2_EFdvw3m8BI-5-9T91WeKTflDuR7rEx-U/edit)查看引导. 使用 [https://liquidize.github.io/mopimopi/](https://liquidize.github.io/mopimopi/) 代替引导中提供的Url.
 
-# Credits
-* Dagaz / Dagaz Ai (Coeurl - NA) - Maintainer of the plugin at the moment
-* Liquidize / Kaliya Y'mhitra (Goblin - NA) - Creator of this plugin, which I forked and added functionality to.
-* Kaliph Soren (Goblin - NA) - Co-developer of Liquidize
-* [Hibiyasleep](https://github.com/hibiyasleep) - Creator of the Kagerou overlay which Liquidize forked and added functionality to.
-* The update functionality of the plugin was taken from Cactbot an open source Raid helper found [here](https://github.com/quisquous/cactbot).
+# 鸣谢
+* 哀曜 (国服 - 拉诺西亚)
+Dagaz / Dagaz Ai (Coeurl - NA) - 插件的CN本地化，目前的更新负责者
+* [Liquidize](https://github.com/Liquidize) / Kaliya Y'mhitra (Goblin - NA) - 插件创始人
+* Kaliph Soren (Goblin - NA) - 插件创始人的合作者
+* [Hibiyasleep](https://github.com/hibiyasleep) - Kagerou伤害美化插件的制作者
+* 插件的更新功能取自Cactbot，点[此](https://github.com/quisquous/cactbot)查看详情.
 
 
